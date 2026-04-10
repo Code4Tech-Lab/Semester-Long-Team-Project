@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact</title>
+    <link rel="stylesheet" href="CSS/signUpStyle.css" />
+</head>
+
+<body>
+
+    <!-- Top Navigation -->
+    <header class="topbar">
+        <div class="container topbar__inner">
+
+            <a class="brand" href="index.html">
+                <span class="brand__icon" aria-hidden="true">🛡️</span>
+                <span class="brand__name">CyberAware</span>
+            </a>
+
+
+            <nav class="navlinks" aria-label="Primary navigation">
+                <a href="learn.html">Learn</a>
+                <a href="quizzes.html">Quizzes</a>
+                <a href="resources.html">Resources</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+
+            <div class="topbar__actions">
+                <a class="btn btn--ghost" href="logInPage.html">Login</a>
+                <a class="btn btn--primary" href="startQuiz.html">Start Quiz</a>
+            </div>
+
+        </div>
+    </header>
+    <main class="auth">
+        <section class="auth__card" aria-labelledby="contactTitle">
+            <header class="auth__head">
+                <div class="auth__brand" aria-hidden="true">🛡️</div>
+                <div>
+                    <h1 id="contactTitle" class="auth__title">Contact Us</h1>
+                    <p class="auth__subtitle">Contact Us If You Are Having an Issuey.</p>
+                </div>
+            </header>
+
+            <form class="form" id="contactForm" enctype="multipart/form-data" autocomplete="on" novalidate>
+
+                <div class="grid">
+                    <label class="field">
+                        <span class="field__label"> FullName</span>
+                        <input id="fullName" class="field__input" type="text" name="fullName"
+                            placeholder="e.g. John Doe" required />
+                    </label>
+                    <label class="field">
+                        <span class="field__label">Email</span>
+                        <input id="email" class="field__input" type="email" name="email"
+                            placeholder="e.g., john@example.com" required />
+                    </label>
+                    <label class="field">
+                        <span class="field__label">Phone number</span>
+                        <input id="phone" class="field__input" type="text" name="phone"
+                            placeholder="e.g., (716) 555-1234" required />
+                    </label>
+                    <label class="field">
+                        <span class="field__label">Address</span>
+                        <input id="address" class="field__input" type="text" name="address" placeholder="Street address"
+                            required />
+                    </label>
+                    <label class="field" for="birthday">
+                        <span class="field__label">Birthday</span>
+                        <input id="birthday" class="field__input" type="date" name="birthday" autocomplete="bday" />
+                    </label>
+                    <div class="row row--inline">
+
+                        <label class="lbl lbl--mini" for="course">Choose Your Course</label>
+                        <select id="course" name="course">
+                            <option value="">-- Select Course --</option>
+                            <option value="html">HTML</option>
+                            <option value="css">CSS</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="cybersecurity">Cybersecurity</option>
+                        </select>
+                    </div>
+                    <div class="row row--inline">
+                        <label class="lbl" for="pref">Preferences</label>
+                        <div class="checks">
+                            <label class="check">
+                                <input id="preferenceEmail" type="checkbox" name="pref" value="apple" /> Email</label>
+                            <label class="check">
+                                <input id="preferencePhone" type="checkbox" name="pref" value="pear" />
+                                Phone</label>
+                        </div>
+                        <div class="row row--inline">
+
+                            <label class="lbl lbl--mini" for="upload">Upload (multiple)</label>
+                            <input id="uploadFiles" name="upload" type="file" multiple />
+                        </div>
+                        <div class="row row--inline">
+                            <label for="issueDescription" class="lbl">Issue Description</label>
+                            <textarea id="issueDescription" name="issueDescription" rows="4" maxlength="300"
+                                placeholder="Briefly describe your issue..." required></textarea>
+                        </div>
+                        <div id="messageBox"></div>
+                        <!-- Actions -->
+                        <div class="actions">
+                            <button class="btn" type="submit">Submit</button>
+                            <button class="btn btn--ghost" type="button" id="fillSampleBtn">Fill Sample</button>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </form>
+        </section>
+    </main>
+    <script src="js/contact.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CyberAware | Data Dashboard</title>
+  <link rel="stylesheet" href="CSS/dashboard.css" />
+</head>
+
+<body>
+  <!-- Top Navigation -->
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="#">
+        <span class="brand__logo">CA</span>
+        <span class="brand__name">CyberAware</span>
+      </a>
+
+      <nav class="nav">
+        <a class="nav__link" href="#">Home</a>
+        <a class="nav__link" href="#">Quizzes</a>
+        <a class="nav__link nav__link--active" href="#">Dashboard</a>
+        <a class="nav__link" href="#">Reports</a>
+      </nav>
+
+      <div class="topbar__actions">
+        <a class="btn btn--ghost" href="#">Login</a>
+        <a class="btn btn--primary" href="#">Sign Up</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <main class="container">
+    <section class="hero">
+      <div class="hero__text">
+        <h1 class="hero__title">Security Awareness Data Dashboard</h1>
+        <p class="hero__subtitle">
+          Monitor quiz performance, training status, and user risk categories in one place.
+        </p>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="stat__label">Total Users</div>
+            <div class="stat__value">128</div>
+          </div>
+          <div class="stat">
+            <div class="stat__label">Completed Training</div>
+            <div class="stat__value">92</div>
+          </div>
+          <div class="stat">
+            <div class="stat__label">High Risk</div>
+            <div class="stat__value">11</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__card">
+        <h2 class="card__title">Filters</h2>
+        <p class="card__hint">Use filters to review specific records.</p>
+
+        <div class="filters">
+          <div class="field">
+            <label class="field__label" for="q">Search</label>
+            <input class="field__input" id="q" type="search" placeholder="Search name, email, status..." />
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="risk">Risk Level</label>
+            <select class="field__select" id="risk">
+              <option>All</option>
+              <option>Low</option>
+              <option>Medium</option>
+              <option>High</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="status">Training Status</label>
+            <select class="field__select" id="status">
+              <option>All</option>
+              <option>Completed</option>
+              <option>In Progress</option>
+              <option>Not Started</option>
+            </select>
+          </div>
+
+          <button class="btn btn--primary btn--full" type="button">Apply</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Table Section -->
+    <section class="panel">
+      <div class="panel__head">
+        <div>
+          <h2 class="panel__title">User Training Records</h2>
+          <p class="panel__meta">Last updated: <strong>Today</strong></p>
+        </div>
+
+        <div class="panel__actions">
+          <button class="btn btn--ghost" type="button">Export CSV</button>
+          <button class="btn btn--primary" type="button">Create Report</button>
+        </div>
+      </div>
+
+      <div class="table-wrap" role="region" aria-label="User training table">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Email</th>
+              <th>Quiz Score</th>
+              <th>Risk</th>
+              <th>Training</th>
+              <th>Last Activity</th>
+              <th class="cell-right">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>
+                <div class="user">
+                  <span class="avatar">RM</span>
+                  <div>
+                    <div class="user__name">Ruhul Molla</div>
+                    <div class="user__role">Student / Member</div>
+                  </div>
+                </div>
+              </td>
+              <td class="muted">ruhul@example.com</td>
+              <td><span class="score score--good">92%</span></td>
+              <td><span class="badge badge--low">Low</span></td>
+              <td><span class="badge badge--done">Completed</span></td>
+              <td class="muted">2026-03-03</td>
+              <td class="cell-right"><a class="link" href="#">View</a></td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="user">
+                  <span class="avatar">AR</span>
+                  <div>
+                    <div class="user__name">Ayesha Rahman</div>
+                    <div class="user__role">Member</div>
+                  </div>
+                </div>
+              </td>
+              <td class="muted">ayesha@example.com</td>
+              <td><span class="score score--mid">71%</span></td>
+              <td><span class="badge badge--med">Medium</span></td>
+              <td><span class="badge badge--progress">In Progress</span></td>
+              <td class="muted">2026-03-02</td>
+              <td class="cell-right"><a class="link" href="#">View</a></td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="user">
+                  <span class="avatar">JS</span>
+                  <div>
+                    <div class="user__name">John Smith</div>
+                    <div class="user__role">Member</div>
+                  </div>
+                </div>
+              </td>
+              <td class="muted">john.smith@example.com</td>
+              <td><span class="score score--low">48%</span></td>
+              <td><span class="badge badge--high">High</span></td>
+              <td><span class="badge badge--none">Not Started</span></td>
+              <td class="muted">2026-02-25</td>
+              <td class="cell-right"><a class="link" href="#">View</a></td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="user">
+                  <span class="avatar">TG</span>
+                  <div>
+                    <div class="user__name">Thor Giudice</div>
+                    <div class="user__role">Team</div>
+                  </div>
+                </div>
+              </td>
+              <td class="muted">thor@example.com</td>
+              <td><span class="score score--good">88%</span></td>
+              <td><span class="badge badge--low">Low</span></td>
+              <td><span class="badge badge--done">Completed</span></td>
+              <td class="muted">2026-03-01</td>
+              <td class="cell-right"><a class="link" href="#">View</a></td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="user">
+                  <span class="avatar">JR</span>
+                  <div>
+                    <div class="user__name">Jessey Rodriguez</div>
+                    <div class="user__role">Team</div>
+                  </div>
+                </div>
+              </td>
+              <td class="muted">jessey@example.com</td>
+              <td><span class="score score--mid">76%</span></td>
+              <td><span class="badge badge--med">Medium</span></td>
+              <td><span class="badge badge--progress">In Progress</span></td>
+              <td class="muted">2026-03-02</td>
+              <td class="cell-right"><a class="link" href="#">View</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="panel__foot">
+        <div class="muted">Showing 5 records</div>
+        <div class="pager">
+          <button class="btn btn--ghost" type="button">Prev</button>
+          <button class="btn btn--ghost" type="button">Next</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="muted">© CyberAware — Security Awareness Platform</div>
+      <div class="footer__links">
+        <a class="link muted" href="#">Privacy</a>
+        <a class="link muted" href="#">Terms</a>
+        <a class="link muted" href="#">Contact</a>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>

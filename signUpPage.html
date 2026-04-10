@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up | CyberAware</title>
+  <link rel="stylesheet" href="CSS/signUpStyle.css"/> 
+
+ <!--     -->
+</head>
+
+<body>
+  
+  
+  <main class="auth">
+    <section class="auth__card" aria-labelledby="signupTitle">
+      <header class="auth__head">
+        <div class="auth__brand" aria-hidden="true">🛡️</div>
+        <div>
+          <h1 id="signupTitle" class="auth__title">Create your account</h1>
+          <p class="auth__subtitle">Join CyberAware to track quiz scores and learn securely.</p>
+        </div>
+      </header>
+
+      <form class="form" action="#" method="post">
+        <div class="grid">
+          <label class="field">
+            <span class="field__label"> Full name</span>
+            <input class="field__input" type="text" name="fullName" placeholder="e.g. John Doe" required />
+          </label>
+
+          <label class="field">
+            <span class="field__label">Phone number</span>
+            <input class="field__input" type="tel" name="phone" placeholder="e.g., (716) 555-1234" required />
+          </label>
+
+          <label class="field grid__full">
+            <span class="field__label">Address</span>
+            <input class="field__input" type="text" name="address" placeholder="Street address" required />
+          </label>
+
+          <label class="field">
+            <span class="field__label">City</span>
+            <input class="field__input" type="text" name="city" placeholder="Buffalo" required />
+          </label>
+
+          <label class="field">
+            <span class="field__label">State</span>
+            <input class="field__input" type="text" name="state" placeholder="NY" required />
+          </label>
+
+          <label class="field">
+            <span class="field__label">ZIP</span>
+            <input class="field__input" type="text" name="zip" placeholder="14201" required />
+          </label>
+
+          <label class="field grid__full">
+            <span class="field__label">Email</span>
+            <input class="field__input" type="email" name="email" placeholder="name@example.com" required />
+          </label>
+        </div>
+
+        <!-- Radio buttons -->
+        <fieldset class="fieldset">
+          <legend class="fieldset__legend">Your Account type</legend>
+          <div class="choice-row">
+            <label class="choice">
+              <input type="radio" name="accountType" value="student" checked />
+              <span>Student</span>
+            </label>
+
+            <label class="choice">
+              <input type="radio" name="accountType" value="instructor" />
+              <span>Instructor</span>
+            </label>
+
+            <label class="choice">
+              <input type="radio" name="accountType" value="guest" />
+              <span>Guest</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Checkboxes -->
+        <fieldset class="fieldset">
+          <legend class="fieldset__legend">Preferences</legend>
+          <div class="choice-col">
+            <label class="choice">
+              <input type="checkbox" name="updates" value="yes" />
+              <span>Send me security tips and updates</span>
+            </label>
+
+            <label class="choice">
+              <input type="checkbox" name="terms" value="agree" required />
+              <span>I agree to the Terms & Privacy Policy</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="actions">
+          <button class="btn btn--primary" type="submit">Create Account</button>
+          <a class="btn btn--ghost" href="logInPage.html">Already have an account? Login</a>
+        </div>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

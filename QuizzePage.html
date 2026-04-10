@@ -1,0 +1,987 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cybersecurity Quiz (25 Questions)</title>
+  <style>
+    :root{
+      --bg0:#070a12;
+      --bg1:#0b1220;
+      --bg2:#0a1526;
+      --text:#eaf0ff;
+      --muted:#9fb0d0;
+      --line:rgba(255,255,255,.10);
+      --line2:rgba(255,255,255,.08);
+      --cardA:rgba(17, 28, 46, .72);
+      --cardB:rgba(10, 20, 36, .72);
+      --blue:#2f6df6;
+      --blue2:#2a61df;
+      --good:#22c55e;
+      --warn:#f59e0b;
+      --bad:#ef4444;
+      --shadow: 0 18px 45px rgba(0,0,0,.55);
+      --radius:18px;
+      --focus: 0 0 0 3px rgba(47,109,246,.35);
+      --font: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:var(--font);
+      color:var(--text);
+      background:
+        radial-gradient(1100px 650px at 25% 30%, rgba(70, 120, 255, 0.35), transparent 60%),
+        radial-gradient(900px 560px at 75% 25%, rgba(30, 220, 170, 0.16), transparent 55%),
+        radial-gradient(700px 450px at 70% 75%, rgba(255, 190, 90, 0.10), transparent 55%),
+        var(--bg0);
+    }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 16px 50px;
+    }
+
+    header{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom: 16px;
+    }
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .brand h1{
+      font-size: 22px;
+      margin:0;
+      letter-spacing:.2px;
+    }
+    .brand p{
+      margin:0;
+      color:var(--muted);
+      font-size: 14px;
+      line-height:1.45;
+    }
+
+    .pillbar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .pill{
+      border:1px solid var(--line2);
+      background: rgba(255,255,255,.04);
+      padding: 10px 12px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 13px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      user-select:none;
+    }
+    .pill b{ color: var(--text); font-weight: 700; }
+
+    .card{
+      background: linear-gradient(180deg, var(--cardA), var(--cardB));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .cardTop{
+      padding: 16px 16px 12px;
+      border-bottom: 1px solid var(--line);
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+
+    .progressWrap{
+      width: min(520px, 100%);
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .progressRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      color:var(--muted);
+      font-size: 13px;
+    }
+    .bar{
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--line2);
+      overflow:hidden;
+    }
+    .bar > span{
+      display:block;
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, var(--blue), rgba(47,109,246,.55));
+      border-radius: 999px;
+      transition: width .25s ease;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    button{
+      border:1px solid var(--line2);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-weight: 650;
+      letter-spacing:.2px;
+    }
+    button:hover{ background: rgba(255,255,255,.08); }
+    button:focus{ outline:none; box-shadow: var(--focus); }
+    button.primary{
+      border-color: rgba(47,109,246,.45);
+      background: linear-gradient(180deg, rgba(47,109,246,.95), rgba(42,97,223,.92));
+    }
+    button.primary:hover{ filter: brightness(1.06); }
+    button.danger{
+      border-color: rgba(239,68,68,.45);
+      background: rgba(239,68,68,.10);
+    }
+    button:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+    }
+
+    .cardBody{
+      padding: 16px;
+    }
+
+    .screen{
+      display:none;
+    }
+    .screen.active{
+      display:block;
+    }
+
+    .startGrid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 14px;
+    }
+    @media (max-width: 860px){
+      .startGrid{ grid-template-columns: 1fr; }
+    }
+
+    .panel{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius: 16px;
+      padding: 14px;
+    }
+    .panel h2{
+      margin:0 0 8px;
+      font-size: 16px;
+    }
+    .panel ul{
+      margin: 8px 0 0 18px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+    .panel li{ margin: 6px 0; }
+
+    .formRow{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-top: 10px;
+    }
+    label{
+      color: var(--muted);
+      font-size: 13px;
+    }
+    input[type="text"]{
+      padding: 12px 12px;
+      border-radius: 12px;
+      border:1px solid var(--line2);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      font-size: 14px;
+    }
+    input[type="text"]:focus{ outline:none; box-shadow: var(--focus); }
+
+    .qTitle{
+      margin:0 0 12px;
+      font-size: 18px;
+      line-height:1.35;
+      letter-spacing:.15px;
+    }
+
+    .choices{
+      display:grid;
+      gap:10px;
+    }
+    .choice{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border:1px solid var(--line2);
+      background: rgba(255,255,255,.03);
+      cursor:pointer;
+      user-select:none;
+      transition: transform .05s ease, background .15s ease;
+    }
+    .choice:hover{ background: rgba(255,255,255,.06); }
+    .choice:active{ transform: translateY(1px); }
+
+    .choice input{ margin-top: 3px; }
+    .choice span{
+      line-height:1.45;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .choice .letter{
+      min-width: 26px;
+      height: 26px;
+      border-radius: 9px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--line2);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      margin-top: -2px;
+    }
+    .choice.selected{
+      border-color: rgba(47,109,246,.55);
+      background: rgba(47,109,246,.12);
+    }
+
+    .navRow{
+      margin-top: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .hint{
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .resultBox{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 860px){
+      .resultBox{ grid-template-columns: 1fr; }
+    }
+
+    .scoreBig{
+      font-size: 44px;
+      margin: 0;
+      letter-spacing: .2px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border:1px solid var(--line2);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size: 13px;
+      width: fit-content;
+    }
+    .badge.good{ border-color: rgba(34,197,94,.35); background: rgba(34,197,94,.10); }
+    .badge.warn{ border-color: rgba(245,158,11,.35); background: rgba(245,158,11,.10); }
+    .badge.bad{ border-color: rgba(239,68,68,.35); background: rgba(239,68,68,.10); }
+
+    .review{
+      margin-top: 14px;
+      display:grid;
+      gap:10px;
+    }
+    details{
+      border:1px solid var(--line2);
+      background: rgba(255,255,255,.03);
+      border-radius: 14px;
+      padding: 10px 12px;
+    }
+    details summary{
+      cursor:pointer;
+      font-weight: 700;
+      color: var(--text);
+      list-style:none;
+      outline:none;
+    }
+    details summary::-webkit-details-marker{ display:none; }
+    .reviewMeta{
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .tag{
+      display:inline-flex;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border:1px solid var(--line2);
+      margin-right: 6px;
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(255,255,255,.03);
+    }
+    .tag.good{ border-color: rgba(34,197,94,.35); background: rgba(34,197,94,.10); }
+    .tag.bad{ border-color: rgba(239,68,68,.35); background: rgba(239,68,68,.10); }
+
+    .srOnly{
+      position:absolute;
+      width:1px;height:1px;
+      padding:0;margin:-1px;
+      overflow:hidden;clip:rect(0,0,0,0);
+      white-space:nowrap;border:0;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <h1>Cybersecurity Quiz</h1>
+        <p>25 questions • Multiple choice • Review your answers at the end.</p>
+      </div>
+      <div class="pillbar" aria-label="Quiz status">
+        <div class="pill" title="Number of questions"><b id="pillTotal">25</b> Questions</div>
+        <div class="pill" title="Passing score threshold"><b id="pillPass">70%</b> Pass Mark</div>
+        <div class="pill" title="Your current attempt name"><b id="pillName">Guest</b></div>
+      </div>
+    </header>
+
+    <main class="card" aria-live="polite">
+      <div class="cardTop">
+        <div class="progressWrap">
+          <div class="progressRow">
+            <span id="progressText">Ready</span>
+            <span id="counterText">0 / 25</span>
+          </div>
+          <div class="bar" aria-label="Progress bar" role="progressbar" aria-valuemin="0" aria-valuemax="25" aria-valuenow="0">
+            <span id="progressBar"></span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="btnReset" class="danger" type="button" title="Clear this attempt">Reset</button>
+          <button id="btnSave" type="button" title="Save progress to this browser">Save</button>
+        </div>
+      </div>
+
+      <div class="cardBody">
+        <!-- START SCREEN -->
+        <section id="screenStart" class="screen active">
+          <div class="startGrid">
+            <div class="panel">
+              <h2>Instructions</h2>
+              <ul>
+                <li>Answer each question and click <b>Next</b>.</li>
+                <li>You can go back using <b>Previous</b>.</li>
+                <li>At the end, you’ll see your score and a full review.</li>
+                <li>Passing score is <b>70%</b> (18/25 correct).</li>
+              </ul>
+
+              <div class="formRow">
+                <label for="nameInput">Candidate Name (optional)</label>
+                <input id="nameInput" type="text" maxlength="40" placeholder="e.g., Md Molla" />
+              </div>
+
+              <div class="navRow">
+                <span class="hint">Tip: Use a consistent approach—read the stem, eliminate distractors, select best answer.</span>
+                <button id="btnStart" class="primary" type="button">Start Quiz</button>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h2>Topics Covered</h2>
+              <ul>
+                <li>Phishing, MFA, password policy</li>
+                <li>Network security (firewalls, IDS/IPS)</li>
+                <li>Access control and least privilege</li>
+                <li>Web/app security basics (OWASP)</li>
+                <li>Incident response and malware types</li>
+              </ul>
+              <p class="hint" style="margin:12px 0 0;">
+                This is a demo quiz page design. You can replace questions with your own bank later.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- QUIZ SCREEN -->
+        <section id="screenQuiz" class="screen" aria-label="Quiz questions">
+          <h2 class="qTitle" id="qText">Question text</h2>
+
+          <form id="choicesForm" class="choices" aria-label="Answer choices">
+            <!-- Choices injected here -->
+          </form>
+
+          <div class="navRow">
+            <div class="hint" id="qHint">Select one option to proceed.</div>
+            <div class="actions">
+              <button id="btnPrev" type="button">Previous</button>
+              <button id="btnNext" class="primary" type="button" disabled>Next</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- RESULT SCREEN -->
+        <section id="screenResult" class="screen" aria-label="Quiz results">
+          <div class="resultBox">
+            <div class="panel">
+              <h2>Result</h2>
+              <p class="badge" id="resultBadge">Status</p>
+              <p class="scoreBig" id="scoreText">0%</p>
+              <p class="hint" id="scoreMeta">You answered 0 out of 25 correctly.</p>
+
+              <div class="navRow">
+                <span class="hint">You can retake the quiz anytime.</span>
+                <button id="btnRetake" class="primary" type="button">Retake</button>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h2>Review</h2>
+              <p class="hint">Expand each item to see your answer vs the correct answer, with an explanation.</p>
+              <div class="review" id="reviewList"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <p class="hint" style="margin-top:14px;">
+      Note: “Save” stores your progress in this browser (localStorage). “Reset” clears it.
+    </p>
+  </div>
+
+  <script>
+    // ----------------------------
+    // Question Bank (25)
+    // ----------------------------
+    const QUESTIONS = [
+      {
+        q: "Which control best reduces the impact of stolen passwords in most environments?",
+        a: ["Password rotation every 30 days", "Multi-Factor Authentication (MFA)", "Security questions", "Longer usernames"],
+        correct: 1,
+        exp: "MFA adds a second factor, making credential theft alone insufficient to access the account."
+      },
+      {
+        q: "Phishing is best described as:",
+        a: ["Encrypting data for confidentiality", "Impersonation to trick users into revealing sensitive info", "Blocking malicious IP addresses", "Scanning networks for open ports"],
+        correct: 1,
+        exp: "Phishing relies on social engineering—deception to obtain credentials or sensitive data."
+      },
+      {
+        q: "The principle of least privilege means:",
+        a: ["Users should have admin rights to speed up work", "Users receive only the access needed to do their job", "All users share one account for auditing", "Security is optional in development"],
+        correct: 1,
+        exp: "Least privilege minimizes blast radius if an account is compromised."
+      },
+      {
+        q: "Which is the strongest password policy option?",
+        a: ["Minimum length 6, no complexity rules", "Minimum length 12 + banned common passwords", "Password never expires, short allowed", "Only require one uppercase letter"],
+        correct: 1,
+        exp: "Longer passwords plus blocking known/common passwords improves resilience against guessing and credential stuffing."
+      },
+      {
+        q: "A firewall primarily:",
+        a: ["Detects malware signatures on endpoints", "Filters network traffic based on rules", "Creates encrypted backups", "Manages user identities"],
+        correct: 1,
+        exp: "Firewalls enforce traffic allow/deny rules by IP, port, protocol, application, etc."
+      },
+      {
+        q: "IDS vs IPS: which statement is correct?",
+        a: ["IDS blocks traffic; IPS only alerts", "IDS alerts; IPS can block traffic", "Both are identical", "IPS only works on endpoints"],
+        correct: 1,
+        exp: "IDS is typically detective (alerting). IPS is preventive (blocking) in-line."
+      },
+      {
+        q: "A VPN primarily provides:",
+        a: ["Public IP blocking", "Encrypted tunnel over untrusted networks", "Antivirus scanning", "Password hashing"],
+        correct: 1,
+        exp: "VPNs provide confidentiality/integrity for traffic between endpoints over insecure networks."
+      },
+      {
+        q: "Which is an example of a DoS attack?",
+        a: ["Sending many requests to exhaust server resources", "Stealing a cookie via XSS", "Changing DNS records legitimately", "Encrypting a file for backup"],
+        correct: 0,
+        exp: "DoS aims to reduce availability by consuming resources or bandwidth."
+      },
+      {
+        q: "Ransomware typically:",
+        a: ["Steals credit card numbers only", "Encrypts data and demands payment to restore access", "Only affects mobile devices", "Is always harmless if detected"],
+        correct: 1,
+        exp: "Ransomware impacts confidentiality/availability by encrypting data and extorting payment."
+      },
+      {
+        q: "Which is an example of data at rest?",
+        a: ["Traffic between browser and server", "A database stored on disk", "A VoIP call", "A live video stream"],
+        correct: 1,
+        exp: "Data at rest refers to stored data (disk, backups, database files)."
+      },
+      {
+        q: "TLS is mainly used to:",
+        a: ["Validate JavaScript syntax", "Encrypt data in transit (e.g., HTTPS)", "Scan files for malware", "Store passwords in plain text"],
+        correct: 1,
+        exp: "TLS protects confidentiality and integrity for data in transit (HTTPS, SMTP STARTTLS, etc.)."
+      },
+      {
+        q: "SQL Injection primarily targets:",
+        a: ["Browser memory management", "Database queries through unsanitized input", "Email headers", "Wi-Fi encryption"],
+        correct: 1,
+        exp: "SQLi occurs when attacker-controlled input is concatenated into queries without proper parameterization."
+      },
+      {
+        q: "XSS (Cross-Site Scripting) is best defined as:",
+        a: ["Injecting scripts into trusted web pages viewed by others", "Breaking AES encryption", "Capturing Wi-Fi handshakes", "Brute forcing SSH keys"],
+        correct: 0,
+        exp: "XSS enables script execution in a victim’s browser within the context of a trusted site."
+      },
+      {
+        q: "CSRF (Cross-Site Request Forgery) exploits:",
+        a: ["User trust in their own browser session", "Weak TLS ciphers", "Open ports on routers", "Outdated BIOS firmware"],
+        correct: 0,
+        exp: "CSRF abuses authenticated sessions to force state-changing actions without user intent."
+      },
+      {
+        q: "The OWASP Top 10 is mainly about:",
+        a: ["Physical security controls", "Most common web application security risks", "Cloud vendor pricing", "Network cabling standards"],
+        correct: 1,
+        exp: "OWASP Top 10 is a widely referenced list of critical web app security risks."
+      },
+      {
+        q: "Hashing a password is important because:",
+        a: ["It makes the password reversible later", "It protects stored passwords even if DB is leaked", "It removes the need for MFA", "It encrypts network traffic automatically"],
+        correct: 1,
+        exp: "Hashing (with salt + strong KDF) reduces damage from password database compromise."
+      },
+      {
+        q: "Which is a secure way to store passwords?",
+        a: ["Plain text", "MD5 without salt", "bcrypt/Argon2 with salt", "Base64 encoding"],
+        correct: 2,
+        exp: "Use modern password hashing functions (Argon2/bcrypt) with salt and appropriate work factors."
+      },
+      {
+        q: "Which log source is most useful for investigating account login activity?",
+        a: ["CPU temperature logs", "Authentication/identity logs", "Printer queue logs", "Screen resolution logs"],
+        correct: 1,
+        exp: "Auth logs capture login attempts, successes/failures, IPs, and identity context."
+      },
+      {
+        q: "In incident response, 'containment' means:",
+        a: ["Document lessons learned", "Stop the spread/impact of the incident", "Restore systems from backup", "Disable all security controls"],
+        correct: 1,
+        exp: "Containment limits damage by isolating affected systems, blocking IOCs, disabling compromised accounts, etc."
+      },
+      {
+        q: "Which is an IOC (Indicator of Compromise)?",
+        a: ["A strong password", "A known malicious hash or domain", "A patched system", "A security policy document"],
+        correct: 1,
+        exp: "IOCs are artifacts suggesting compromise: hashes, IPs, domains, filenames, registry keys, etc."
+      },
+      {
+        q: "Zero Trust architecture emphasizes:",
+        a: ["Trust internal networks by default", "Never trust, always verify", "Use one shared admin account", "Disable logging"],
+        correct: 1,
+        exp: "Zero Trust assumes breach and requires continuous verification and least privilege."
+      },
+      {
+        q: "What is the main purpose of network segmentation?",
+        a: ["Improve Wi-Fi speed only", "Limit lateral movement after a breach", "Make passwords shorter", "Disable encryption"],
+        correct: 1,
+        exp: "Segmentation reduces attack surface and confines intruders to smaller zones."
+      },
+      {
+        q: "A security patch primarily:",
+        a: ["Adds new UI features", "Fixes vulnerabilities and bugs", "Disables antivirus", "Makes data unencrypted"],
+        correct: 1,
+        exp: "Patches remediate known vulnerabilities, reducing exploitability."
+      },
+      {
+        q: "What does 'CIA triad' stand for?",
+        a: ["Control, Inspection, Authorization", "Confidentiality, Integrity, Availability", "Compliance, Identity, Access", "Cloud, Infrastructure, Automation"],
+        correct: 1,
+        exp: "CIA triad is a foundational model for security objectives: confidentiality, integrity, availability."
+      },
+      {
+        q: "Which is the best example of 'defense in depth'?",
+        a: ["Only a firewall at the perimeter", "Multiple layered controls (MFA, least privilege, monitoring, patching)", "Disabling logs to reduce noise", "Using the same password everywhere"],
+        correct: 1,
+        exp: "Defense in depth uses layered controls so that failure of one control does not lead to full compromise."
+      }
+    ];
+
+    // ----------------------------
+    // State
+    // ----------------------------
+    const PASS_PERCENT = 70;
+    const STORAGE_KEY = "cyber_quiz_attempt_v1";
+
+    const state = {
+      name: "Guest",
+      idx: 0,
+      answers: Array(QUESTIONS.length).fill(null) // selected option index
+    };
+
+    // ----------------------------
+    // DOM
+    // ----------------------------
+    const el = (id) => document.getElementById(id);
+
+    const screenStart = el("screenStart");
+    const screenQuiz = el("screenQuiz");
+    const screenResult = el("screenResult");
+
+    const pillTotal = el("pillTotal");
+    const pillPass = el("pillPass");
+    const pillName = el("pillName");
+
+    const progressText = el("progressText");
+    const counterText = el("counterText");
+    const progressBar = el("progressBar");
+    const progressRole = document.querySelector(".bar[role='progressbar']");
+
+    const nameInput = el("nameInput");
+    const btnStart = el("btnStart");
+    const btnPrev = el("btnPrev");
+    const btnNext = el("btnNext");
+    const btnRetake = el("btnRetake");
+    const btnReset = el("btnReset");
+    const btnSave = el("btnSave");
+
+    const qText = el("qText");
+    const qHint = el("qHint");
+    const choicesForm = el("choicesForm");
+
+    const resultBadge = el("resultBadge");
+    const scoreText = el("scoreText");
+    const scoreMeta = el("scoreMeta");
+    const reviewList = el("reviewList");
+
+    // ----------------------------
+    // Helpers
+    // ----------------------------
+    function showScreen(which){
+      [screenStart, screenQuiz, screenResult].forEach(s => s.classList.remove("active"));
+      which.classList.add("active");
+    }
+
+    function setProgress(currentIndex){
+      const total = QUESTIONS.length;
+      const currentNum = Math.min(currentIndex + 1, total);
+      const answeredCount = state.answers.filter(v => v !== null).length;
+
+      pillTotal.textContent = total;
+      pillPass.textContent = `${PASS_PERCENT}%`;
+      pillName.textContent = state.name || "Guest";
+
+      progressText.textContent = (screenQuiz.classList.contains("active"))
+        ? `Answered ${answeredCount} of ${total}`
+        : "Ready";
+
+      counterText.textContent = (screenQuiz.classList.contains("active"))
+        ? `${currentNum} / ${total}`
+        : `0 / ${total}`;
+
+      const percent = (screenQuiz.classList.contains("active"))
+        ? (currentIndex / total) * 100
+        : 0;
+
+      progressBar.style.width = `${percent}%`;
+      progressRole?.setAttribute("aria-valuenow", String(currentIndex));
+    }
+
+    function renderQuestion(){
+      const q = QUESTIONS[state.idx];
+      qText.textContent = `Q${state.idx + 1}. ${q.q}`;
+      qHint.textContent = "Select one option to proceed.";
+
+      choicesForm.innerHTML = "";
+
+      const selected = state.answers[state.idx];
+      const letters = ["A","B","C","D"];
+
+      q.a.forEach((opt, i) => {
+        const id = `q${state.idx}_opt${i}`;
+
+        const label = document.createElement("label");
+        label.className = "choice" + (selected === i ? " selected" : "");
+        label.setAttribute("for", id);
+
+        const radio = document.createElement("input");
+        radio.type = "radio";
+        radio.name = "choice";
+        radio.id = id;
+        radio.value = String(i);
+        radio.checked = (selected === i);
+
+        radio.addEventListener("change", () => {
+          state.answers[state.idx] = i;
+          updateChoiceUI();
+          btnNext.disabled = false;
+          qHint.textContent = "Answer saved. You can continue.";
+        });
+
+        const letter = document.createElement("span");
+        letter.className = "letter";
+        letter.textContent = letters[i];
+
+        const text = document.createElement("span");
+        text.textContent = opt;
+
+        label.appendChild(radio);
+        label.appendChild(letter);
+        label.appendChild(text);
+
+        choicesForm.appendChild(label);
+      });
+
+      btnPrev.disabled = (state.idx === 0);
+      btnNext.textContent = (state.idx === QUESTIONS.length - 1) ? "Finish" : "Next";
+      btnNext.disabled = (state.answers[state.idx] === null);
+
+      setProgress(state.idx);
+    }
+
+    function updateChoiceUI(){
+      const labels = choicesForm.querySelectorAll(".choice");
+      labels.forEach((lb) => lb.classList.remove("selected"));
+
+      const selected = state.answers[state.idx];
+      if (selected === null) return;
+
+      const checked = choicesForm.querySelector(`#q${state.idx}_opt${selected}`);
+      if (checked){
+        checked.closest(".choice")?.classList.add("selected");
+      }
+    }
+
+    function scoreQuiz(){
+      let correct = 0;
+      for (let i = 0; i < QUESTIONS.length; i++){
+        if (state.answers[i] === QUESTIONS[i].correct) correct++;
+      }
+      const percent = Math.round((correct / QUESTIONS.length) * 100);
+      return { correct, percent };
+    }
+
+    function renderResults(){
+      const { correct, percent } = scoreQuiz();
+      scoreText.textContent = `${percent}%`;
+      scoreMeta.textContent = `${state.name || "Guest"} answered ${correct} out of ${QUESTIONS.length} correctly.`;
+
+      // Badge
+      resultBadge.className = "badge";
+      if (percent >= PASS_PERCENT){
+        resultBadge.classList.add("good");
+        resultBadge.textContent = "PASS ✅";
+      } else if (percent >= 50){
+        resultBadge.classList.add("warn");
+        resultBadge.textContent = "NEEDS IMPROVEMENT ⚠️";
+      } else {
+        resultBadge.classList.add("bad");
+        resultBadge.textContent = "FAIL ❌";
+      }
+
+      // Review
+      reviewList.innerHTML = "";
+      state.answers.forEach((ans, i) => {
+        const q = QUESTIONS[i];
+        const isCorrect = ans === q.correct;
+
+        const details = document.createElement("details");
+        const summary = document.createElement("summary");
+        summary.textContent = `Q${i+1}: ${isCorrect ? "Correct" : "Incorrect"} — ${q.q}`;
+
+        const meta = document.createElement("div");
+        meta.className = "reviewMeta";
+
+        const tag = document.createElement("span");
+        tag.className = "tag " + (isCorrect ? "good" : "bad");
+        tag.textContent = isCorrect ? "Correct" : "Incorrect";
+
+        const your = document.createElement("p");
+        your.style.margin = "8px 0 0";
+        your.innerHTML = `<span class="srOnly">Your answer:</span><b>Your answer:</b> ${ans === null ? "No answer" : q.a[ans]}`;
+
+        const corr = document.createElement("p");
+        corr.style.margin = "6px 0 0";
+        corr.innerHTML = `<span class="srOnly">Correct answer:</span><b>Correct:</b> ${q.a[q.correct]}`;
+
+        const exp = document.createElement("p");
+        exp.style.margin = "6px 0 0";
+        exp.innerHTML = `<b>Explanation:</b> ${q.exp}`;
+
+        meta.appendChild(tag);
+        meta.appendChild(your);
+        meta.appendChild(corr);
+        meta.appendChild(exp);
+
+        details.appendChild(summary);
+        details.appendChild(meta);
+
+        reviewList.appendChild(details);
+      });
+
+      // Progress bar to full
+      progressBar.style.width = "100%";
+      progressText.textContent = "Completed";
+      counterText.textContent = `${QUESTIONS.length} / ${QUESTIONS.length}`;
+      progressRole?.setAttribute("aria-valuenow", String(QUESTIONS.length));
+    }
+
+    function saveAttempt(){
+      const payload = {
+        name: state.name,
+        idx: state.idx,
+        answers: state.answers
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    }
+
+    function loadAttempt(){
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return false;
+      try{
+        const payload = JSON.parse(raw);
+        if (!payload || !Array.isArray(payload.answers)) return false;
+
+        state.name = (payload.name || "Guest").toString().slice(0,40);
+        state.idx = Math.max(0, Math.min(payload.idx ?? 0, QUESTIONS.length - 1));
+        state.answers = payload.answers.slice(0, QUESTIONS.length).map(v => (Number.isInteger(v) ? v : null));
+
+        return true;
+      } catch {
+        return false;
+      }
+    }
+
+    function resetAttempt(){
+      state.name = "Guest";
+      state.idx = 0;
+      state.answers = Array(QUESTIONS.length).fill(null);
+      localStorage.removeItem(STORAGE_KEY);
+    }
+
+    // ----------------------------
+    // Events
+    // ----------------------------
+    btnStart.addEventListener("click", () => {
+      const n = (nameInput.value || "").trim();
+      state.name = n ? n.slice(0, 40) : "Guest";
+      showScreen(screenQuiz);
+      renderQuestion();
+    });
+
+    btnPrev.addEventListener("click", () => {
+      if (state.idx > 0){
+        state.idx--;
+        renderQuestion();
+      }
+    });
+
+    btnNext.addEventListener("click", () => {
+      // Require answer
+      if (state.answers[state.idx] === null){
+        qHint.textContent = "Please select an option before continuing.";
+        return;
+      }
+
+      if (state.idx < QUESTIONS.length - 1){
+        state.idx++;
+        renderQuestion();
+      } else {
+        // Finish
+        showScreen(screenResult);
+        renderResults();
+      }
+    });
+
+    btnRetake.addEventListener("click", () => {
+      resetAttempt();
+      nameInput.value = "";
+      pillName.textContent = "Guest";
+      showScreen(screenStart);
+      setProgress(0);
+    });
+
+    btnReset.addEventListener("click", () => {
+      resetAttempt();
+      nameInput.value = "";
+      showScreen(screenStart);
+      setProgress(0);
+      alert("Attempt cleared.");
+    });
+
+    btnSave.addEventListener("click", () => {
+      saveAttempt();
+      alert("Progress saved in this browser.");
+    });
+
+    // ----------------------------
+    // Init
+    // ----------------------------
+    (function init(){
+      pillTotal.textContent = QUESTIONS.length;
+      pillPass.textContent = `${PASS_PERCENT}%`;
+
+      const loaded = loadAttempt();
+      if (loaded){
+        // if they have any answer, resume quiz screen
+        const anyAnswered = state.answers.some(v => v !== null);
+        nameInput.value = state.name !== "Guest" ? state.name : "";
+
+        pillName.textContent = state.name || "Guest";
+
+        if (anyAnswered){
+          showScreen(screenQuiz);
+          renderQuestion();
+        } else {
+          showScreen(screenStart);
+          setProgress(0);
+        }
+      } else {
+        showScreen(screenStart);
+        setProgress(0);
+      }
+    })();
+  </script>
+</body>
+</html>

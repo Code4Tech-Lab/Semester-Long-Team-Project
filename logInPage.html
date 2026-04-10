@@ -1,0 +1,102 @@
+<!-- login.html -->
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CyberAware — Login</title>
+  <link rel="stylesheet" href="CSS/style.css" />
+
+  <!--  -->
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="index.html">
+        <span class="brand__badge" aria-hidden="true">🛡️</span>
+        <span class="brand__name">CyberAware</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a class="nav__link" href="learn.html">Learn</a>
+        <a class="nav__link nav__link--active" href="quizzes.html">Quizzes</a>
+        <a class="nav__link" href="resources.html">Resources</a>
+        <a class="nav__link" href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="hero">
+    <div class="hero__inner">
+
+      <!-- Left content -->
+      <section class="copy" aria-label="Welcome">
+        <h1 class="copy__title">Welcome back.</h1>
+        <p class="copy__lead">
+          Log in to track quiz results, review modules, and continue your
+          cybersecurity learning path.
+        </p>
+
+        <ul class="tips" aria-label="Security tips">
+          <li class="tip">
+            <span class="tip__dot tip__dot--green" aria-hidden="true"></span>
+            <div class="tip__text">
+              <strong>Use MFA</strong>
+              <span>Protect your account with a second factor.</span>
+            </div>
+          </li>
+
+          <li class="tip">
+            <span class="tip__dot tip__dot--yellow" aria-hidden="true"></span>
+            <div class="tip__text">
+              <strong>Avoid password reuse</strong>
+              <span>Use a passphrase or password manager.</span>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Right card -->
+      <section class="card" aria-label="Login form">
+        <h2 class="card__title">Login</h2>
+        <p class="card__sub">Enter your credentials to continue.</p>
+
+        <form class="form" action="#" method="post">
+          <div class="form__grid">
+            <label class="field">
+              <span class="field__label">Email</span>
+              <input class="field__input" type="email" name="email" placeholder="you@example.com" required />
+            </label>
+
+            <label class="field">
+              <span class="field__label">Password</span>
+              <input class="field__input" type="password" name="password" placeholder="••••••••" required />
+            </label>
+          </div>
+
+          <div class="form__row">
+            <label class="check">
+              <input type="checkbox" name="remember" />
+              <span>Remember me</span>
+            </label>
+
+            <a class="link" href="#">Forgot password?</a>
+          </div>
+
+          <button class="btn" type="submit">Login</button>
+
+          <p class="card__foot">
+            No account? <a class="link" href="signUpPage.html">Sign up</a>
+          </p>
+        </form>
+      </section>
+
+    </div>
+  </main>
+
+</body>
+
+</html>

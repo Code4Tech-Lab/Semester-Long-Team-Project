@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CyberAware - Contact</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Same top bar -->
+  <header class="topbar">
+    <div class="topbar__brand">
+      <span class="dot" aria-hidden="true"></span>
+      <a class="topbar__logo" href="#">CyberAware</a>
+    </div>
+
+    <nav class="topbar__nav">
+      <a class="topbar__link" href="#">Learn</a>
+      <a class="topbar__link" href="#">Quizzes</a>
+      <a class="topbar__link" href="#">Resources</a>
+      <a class="topbar__link" href="#">About</a>
+      <a class="topbar__link is-active" href="#">Contact</a>
+    </nav>
+
+    <div class="topbar__actions">
+      <a class="btn btn--ghost" href="#">Login</a>
+      <a class="btn btn--primary" href="#">Start Quiz</a>
+    </div>
+  </header>
+
+  <main class="page page--left">
+    <div class="page__title">
+      <h1>Contact Us If You Are Having an Issue</h1>
+      <h2>Contact</h2>
+    </div>
+
+    <!-- Contact form uses SAME components/styles -->
+    <section class="card card--plain">
+      <form class="form" action="#" method="post" enctype="multipart/form-data">
+        <div class="grid grid--2">
+          <div class="field">
+            <label class="field__label" for="c_name">Full name</label>
+            <input class="input" id="c_name" name="fullName" type="text" placeholder="e.g. John Doe" required />
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="c_email">Email</label>
+            <input class="input" id="c_email" name="email" type="email" placeholder="e.g. john@example.com" required />
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="c_phone">Phone number</label>
+            <input class="input" id="c_phone" name="phone" type="tel" placeholder="e.g. (716) 555-1234" />
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="c_addr">Address</label>
+            <input class="input" id="c_addr" name="address" type="text" placeholder="Street address" />
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="c_bday">Birthday</label>
+            <input class="input" id="c_bday" name="birthday" type="date" />
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="c_course">Choose Your Course</label>
+            <select class="input" id="c_course" name="course">
+              <option>Advanced Networking</option>
+              <option>Web Technology</option>
+              <option>CyberOps</option>
+              <option>Linux Administration</option>
+            </select>
+          </div>
+
+          <div class="field field--full">
+            <label class="field__label">Preferences</label>
+            <div class="inline">
+              <label class="check check--inline">
+                <input type="checkbox" name="prefEmail" />
+                <span>Email</span>
+              </label>
+              <label class="check check--inline">
+                <input type="checkbox" name="prefPhone" />
+                <span>Phone</span>
+              </label>
+            </div>
+          </div>
+
+        <!-- Upload (multiple) -->
+<div class="field field--full">
+  <label class="field__label" for="c_files">Upload (multiple)</label>
+
+  <div class="upload">
+    <input class="upload__input" id="c_files" name="files" type="file" multiple />
+    <span class="upload__btn">Choose files</span>
+    <span class="upload__hint" id="fileHint">No files selected</span>
+  </div>
+
+  <ul class="upload__list" id="fileList" aria-live="polite"></ul>
+</div>
+
+<!-- Issue Description -->
+<div class="field field--full">
+  <label class="field__label" for="c_issue">Issue Description</label>
+  <textarea class="input input--textarea input--lg"
+            id="c_issue"
+            name="issue"
+            placeholder="Briefly describe your issue..."
+            required></textarea>
+</div>
+
+        <div class="actions actions--left">
+          <button class="btn btn--light" type="submit">Submit</button>
+          <button class="btn btn--dark" type="button">Fill Sample</button>
+        </div>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
